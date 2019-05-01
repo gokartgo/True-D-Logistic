@@ -1,0 +1,38 @@
+.ContentLeft {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 350px;
+    height: 100%;
+    position: fixed;
+    & > div {
+        width: 250px;
+        & > h1 {
+            color: white;
+            font-size: 48px;
+        }
+    }
+}
+
+.ContentRight {
+    position: absolute;
+    top: 56px;
+    bottom: 0px;
+    left: 350px;
+    right: 0px;
+    overflow-y: auto;
+    align-content: center;
+    .ContentForm {
+        text-align: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .ContentLeft{
+        display: none;
+    }
+    .ContentRight{
+        left: 0px;
+    }
+}

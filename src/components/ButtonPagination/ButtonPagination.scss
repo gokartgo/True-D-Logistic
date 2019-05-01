@@ -1,0 +1,23 @@
+.ButtonPagination {
+    margin: 12px;
+    height: 50px;
+    color: red;
+    background: white;
+    border: 2px solid red;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.next {
+    width: 100px;
+}
+
+.previous {
+    width: 100px;
+}
+
+.Disabled {
+    color: gray;
+    border: 2px solid gray;
+    cursor: default;
+}
