@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes'
 import { updateObject } from '../utility'
 
 const initialState = {
-    key: '',
+    userKey: '',
     load: false,
     form1: {
         firstName: '',
@@ -28,7 +28,7 @@ const addFormStart = (state, action) => {
 
 const addFormSuccess = (state, action) => {
     return updateObject(state, {
-        key: action.key,
+        userKey: action.userKey,
         [action.formContent]: action.form,
         load: false
     })
@@ -44,7 +44,7 @@ const updateFormStart = (state, action) => {
 
 const updateFormSuccess = (state, action) => {
     return updateObject(state, {
-        key: action.key,
+        userKey: action.userKey,
         [action.formContent]: action.form,
         load: false
     })
@@ -52,6 +52,11 @@ const updateFormSuccess = (state, action) => {
 
 const updateFormFail = (state, action) => {
     return updateObject(state, { load: false })
+}
+
+const clearForm = (state, action) => {
+    console.log('state', state)
+    return updateObject(state, state)
 }
 
 const reducer = (state = initialState, action) => {
@@ -62,6 +67,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.UPDATE_FORM_START: return updateFormStart(state, action)
         case actionTypes.UPDATE_FORM_SUCCESS: return updateFormSuccess(state, action)
         case actionTypes.UPDATE_FORM_FAIL: return updateFormFail(state, action)
+        case actionTypes.CLEAR_FORM: return clearForm(initialState, action)
         default:
             return state;
     }

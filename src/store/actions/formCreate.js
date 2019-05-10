@@ -15,21 +15,21 @@ const updateFormStart = () => {
     }
 }
 
-const addFormSuccess = (formContent, form, key) => {
+const addFormSuccess = (formContent, form, userKey) => {
     return {
         type: actionTypes.ADD_FORM_SUCCESS,
         formContent,
         form,
-        key,
+        userKey,
     }
 }
 
-const updateFormSuccess = (formContent, form, key) => {
+const updateFormSuccess = (formContent, form, userKey) => {
     return {
         type: actionTypes.UPDATE_FORM_SUCCESS,
         formContent,
         form,
-        key,
+        userKey,
     }
 }
 
@@ -65,16 +65,27 @@ export const addForm = (step, form) => dispatch => {
 
 export const updateForm = (step, form) => dispatch => {
     let formContent = `form${step}`
+    const userKey = Cookies.get('key')
     dispatch(updateFormStart())
+    console.log('testtest1')
     return new Promise((resolve, reject) => {
-        axios.put(`/form/${Cookies.get('key')}/${formContent}.json`, {
+        console.log('testtest2')
+        axios.put(`/form/${userKey}/${formContent}.json`, {
             ...form
         }).then(response => {
-            dispatch(updateFormSuccess(formContent, form, response.data.name))
+            console.log('response ', response)
+            dispatch(updateFormSuccess(formContent, form, userKey))
             resolve()
         }).catch(e => {
+            console.log('error', e)
             dispatch(updateFormFail())
             reject()
         })
+    })
+}
+
+export const clearForm = () => dispatch => {
+    dispatch({
+        type: actionTypes.CLEAR_FORM,
     })
 }
